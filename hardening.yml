@@ -1,0 +1,19 @@
+---
+- name: hardening check
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: first check
+      import_role:
+        name: rhel7hard
+
+- name: convert json to csv
+  hosts: localhost
+  gather_facts: false
+  become: yes
+  tasks:
+    - aft.hardening.convert_to_csv:
+        output_file_path: '/tmp/output'
+      delegate_to: localhost
+

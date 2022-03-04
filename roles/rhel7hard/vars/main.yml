@@ -1,0 +1,15 @@
+---
+# vars file for rhel7hardening
+scripts:
+- src: netrc.sh
+- src: netrc_world.sh
+- src: rhosts.sh
+- src: root_path.sh
+- src: uid.sh
+- src: gid.sh
+- src: usr_dot.sh
+- src: usr_hdir_perm.sh
+- src: usr_forward.sh
+- src: groups.sh
+- src: dup_group.sh
+- src: dup_user.sh

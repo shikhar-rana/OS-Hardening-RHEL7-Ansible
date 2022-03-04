@@ -1,0 +1,24 @@
+---
+# tasks file for rhel7hardening
+- name: copy bash scripts to /tmp
+  copy:
+    src: "{{ item.src }}"
+    dest: /tmp/
+    mode: 0777
+  with_items: "{{ scripts }}"
+- name: finaloutput
+  aft.hardening.final:
+  register: result1
+- file:
+    path: /tmp/output/{{ansible_host}}
+    state: directory
+  delegate_to: localhost
+- copy:
+    content: "{{ result1.meta | to_nice_json }}"
+    dest: /tmp/output/{{ansible_host}}/output.json
+  delegate_to: localhost
+- name: remove bash scripts from /tmp
+  file:
+    path: "/tmp/{{ item.src }}"
+    state: absent
+  with_items: "{{ scripts }}"
